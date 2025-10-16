@@ -1,0 +1,14 @@
+package com.doubtnut.clone.repository;
+
+import com.doubtnut.clone.model.Question;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface QuestionRepository extends JpaRepository<Question, Long> {
+    @EntityGraph(attributePaths = {"answers", "answers.user", "user"})
+    List<Question> findAllByOrderByCreatedAtDesc();
+}
+
+
